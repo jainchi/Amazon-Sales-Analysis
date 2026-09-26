@@ -47,6 +47,20 @@ The queries are organized progressively by concept:
   
 - **Q60** — A PL/pgSQL stored procedure (`productquantity`) that validates stock, decrements inventory, and inserts a new order + order item transactionally, with `RAISE EXCEPTION`/`RAISE NOTICE` for error handling and logging.
 
+
+**Business Analytics Highlights**
+
+The later sections focus on translating SQL into business questions rather than simply demonstrating syntax.
+Examples include:
+
+Identifying high-value and active customer segments
+Detecting historically active customers whose purchasing activity has declined
+Measuring YoY and MoM revenue changes
+Ranking product categories by state
+Tracking cumulative seller revenue against business milestones
+Identifying products approaching potential stockout based on historical sales velocity
+Evaluating order-value exposure based on payment statu
+
 ## Notes on Design Decisions
 
 A few queries use a fixed historical date (rather than `CURRENT_DATE`) as the anchor point for "recency" calculations (e.g. churn detection in Q52–Q53). This is intentional: the underlying dataset is static and historical, so anchoring against `CURRENT_DATE` would cause every customer to appear as churned. The anchor date is set relative to the dataset's own most recent order date instead.
